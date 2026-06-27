@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sound Shop - Enceintes Bluetooth</title>
+    <style>
+          /* RESET & BASE */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #1a1a2e;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            border-bottom: 4px solid #e94560;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+
+        header p {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        nav-links{
+            display:  flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav-links a:hover {
+            color: #1a1a2e;
+        }
+
+        .hero {
+    height: 100vh;
+    background:
+        linear-gradient(rgba(0,0,0,.4), rgba(0,0,0,.4)),
+        url("public/background.jpg");
+
+    background-size: cover;
+    background-position: center;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    padding-top: 80px; /* important pour navbar fixed */
+}
+
+.hero-content {
+    color: white;
+}
+
+.hero-content h2 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+}
+
+.btn {
+    display: inline-block;
+    background: white;
+    color: black;
+    padding: 12px 25px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #b8860b;
+    color: white;
+}
+
+.products-section {
+    padding: 100px 8% 80px;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 50px;
+}
+
+/* bouton "voir plus" */
+.more-products {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+        .container {
+            width: 1100px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 20px;
+            padding-right: 20px;
+            background: transparent;
+        }
+
+        .product-grid {
+            width: 100%;
+            margin-top: 0;
+            margin-bottom: 0;
+            margin-left: 0;
+            margin-right: 0;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            padding-left: 0;
+            padding-right: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 30px 20px;
+        }
+
+        .product-card {
+            width: 320px;
+            height: auto;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            margin-left: 0;
+            margin-right: 0;
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+            border-left: 1px solid #ddd;
+            border-right: 1px solid #ddd;
+            border-radius: 12px;
+            padding-top: 20px;
+            padding-bottom: 25px;
+            padding-left: 20px;
+            padding-right: 20px;
+            background: #ffffff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            transition: box-shadow 0.25s ease, transform 0.25s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .product-card:hover {
+            box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+            transform: translateY(-6px);
+            border-color: #e94560;
+        }
+
+        .product-card .image-wrapper {
+            width: 200px;
+            height: 200px;
+            margin-top: 0;
+            margin-bottom: 15px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-top: 8px;
+            padding-bottom: 8px;
+            padding-left: 8px;
+            padding-right: 8px;
+            background: #fafafa;
+            border-radius: 16px;
+            border: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .product-card .image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            margin: 0;
+            padding: 0;
+            border: none;
+        }
+
+        .product-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-top: 5px;
+            margin-bottom: 6px;
+            margin-left: 0;
+            margin-right: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            padding-left: 4px;
+            padding-right: 4px;
+        }
+
+        .product-card .brand {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #e94560;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-top: 0;
+            margin-bottom: 8px;
+            margin-left: 0;
+            margin-right: 0;
+            padding-top: 2px;
+            padding-bottom: 2px;
+            padding-left: 12px;
+            padding-right: 12px;
+            background: #fce4e8;
+            border-radius: 30px;
+            display: inline-block;
+        }
+
+        .product-card .description {
+            font-size: 0.95rem;
+            color: #555;
+            margin-top: 0;
+            margin-bottom: 15px;
+            margin-left: 0;
+            margin-right: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            padding-left: 6px;
+            padding-right: 6px;
+            line-height: 1.5;
+        }
+
+        .product-card .price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-top: 0;
+            margin-bottom: 16px;
+            margin-left: 0;
+            margin-right: 0;
+            padding-top: 4px;
+            padding-bottom: 4px;
+            padding-left: 10px;
+            padding-right: 10px;
+            background: #f0f0f0;
+            border-radius: 40px;
+            display: inline-block;
+        }
+
+        .product-card .btn {
+            display: inline-block;
+            background: #1a1a2e;
+            color: #fff;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            border-radius: 40px;
+            padding-top: 12px;
+            padding-bottom: 12px;
+            padding-left: 32px;
+            padding-right: 32px;
+            margin-top: 0;
+            margin-bottom: 0;
+            margin-left: 0;
+            margin-right: 0;
+            border: 2px solid transparent;
+            transition: background 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+            cursor: pointer;
+        }
+
+        .product-card .btn:hover {
+            background: #e94560;
+            border-color: #e94560;
+            transform: scale(1.03);
+        }
+
+        .scaler-note {
+            width: 100%;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            margin-left: 0;
+            margin-right: 0;
+            padding-top: 16px;
+            padding-bottom: 16px;
+            padding-left: 20px;
+            padding-right: 20px;
+            background: #1a1a2e;
+            color: #fff;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 0.95rem;
+            border-left: 6px solid #e94560;
+        }
+
+        .scaler-note span {
+            font-weight: 700;
+            color: #e94560;
+        }
+
+        footer {
+            background: #1a1a2e;
+            color: #aaa;
+            text-align: center;
+            padding: 20px 0;
+            border-top: 2px solid #e94560;
+            margin-top: 30px;
+        }
+
+        footer p {
+            margin: 0;
+            padding: 0;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 1150px) {
+            .container {
+                width: 95%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .product-card {
+                width: 100%;
+                max-width: 380px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .product-grid {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+            .product-card .image-wrapper {
+                width: 160px;
+                height: 160px;
+            }
+            .product-card {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>🔊 Sound Shop</h1>
+    <p>Enceintes Bluetooth · Son &amp; Design</p>
+    <ul class="nav-links">
+        <li><a href="#hero">Accueil</a></li>
+        <li><a href="#produit">Produits</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</header>
+
+<section id="hero" class="hero">
+    <div class="hero-content">
+        <h2>Arrivage des enseignes de haute qualité</h2>
+        <p>Faites le choix entre nos diiférentes marques disponibles.</p>
+        <a href="#produits" class="btn">Découvrir</a>
+    </div>
+</section>
+<main>
+<section id="produits" class="product-section">
+    <h2 class="section title">Nos Produits</h2>
+<div class="container">
+
+    <div class="product-grid">
+
+        <!-- PRODUIT 1 – JBL Flip 6 -->
+        <div class="product-card">
+            <div class="image-wrapper">
+                <img 
+                    src="images/jbl-flip6.jpg"
+                    alt="JBL Flip 6"
+                    loading="lazy"
+                >
+            </div>
+            <h3>JBL Flip 6</h3>
+            <span class="brand">JBL</span>
+            <p class="description">Étanche IP67, son puissant, batterie 12h.</p>
+            <span class="price">58 900 Fcfa</span>
+            <button class="btn">Voir le produit</button>
+        </div>
+
+        <!-- PRODUIT 2 – Sony XB43 -->
+        <div class="product-card">
+            <div class="image-wrapper">
+                <img 
+                    src="images/sony-xb43.jpg" 
+                    alt="Sony XB43"
+                    loading="lazy"
+                >
+            </div>
+            <h3>Sony XB43</h3>
+            <span class="brand">SONY</span>
+            <p class="description">Extra Bass, LED intégrée, autonomie 24h.</p>
+            <span class="price">84 500 Fcfa</span>
+            <button class="btn">Voir le produit</button>
+        </div>
+
+        <!-- PRODUIT 3 – Bose SoundLink Flex -->
+        <div class="product-card">
+            <div class="image-wrapper">
+                <img 
+                    src="images/bose-flex.jpg" 
+                    alt="Bose SoundLink Flex"
+                    loading="lazy"
+                >
+            </div>
+            <h3>Bose SoundLink Flex</h3>
+            <span class="brand">BOSE</span>
+            <p class="description">Son clair, design robuste, IP67, 12h.</p>
+            <span class="price">98 500 Fcfa</span>
+            <button class="btn">Voir le produit</button>
+        </div>
+    </div>
+    <div class="scaler-note">
+        <div class="contact title">📬 Nous contacter</div>
+        <div class="contact item">
+            <i>✉️</i>
+            <a href="mailto:contact@soundshop.cg>contact@soundshop.cg</a>
+        </div>    
+        <div class="contact item"></a>
+            <i>📞</i>
+            <a href="tel:+242061151515">+242 06 115 15 15</a>
+    </div>
+    <div style="margin-top: 4px; font-size: 0.8rem; opacity: 0.6; border-top: 1px solid rgba(255, 255, 255,0.15); padding-top: 8px; width: 80%;">
+        Du lundi au samedi 9h - 18h
+    </div>
+</div>
+</section>
+</main>
+
+<footer>
+    <p>&copy; 2026 Sound Shop — Tous droits réservés</p>
+</footer>
+
+</body>
+</html>
